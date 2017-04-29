@@ -3,6 +3,8 @@ package com.sdaacademy.kasperek.andrzej.apitasks;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import butterknife.BindView;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
