@@ -1,4 +1,4 @@
-package com.sdaacademy.kasperek.andrzej.apitasks;
+package com.sdaacademy.kasperek.andrzej.apitasks.model;
 
 /**
  * Created by RENT on 2017-04-29.
@@ -7,8 +7,10 @@ package com.sdaacademy.kasperek.andrzej.apitasks;
 public class Task {
     private boolean compleated;
     private long id;
-    private long user;
     private String value;
+
+    public Task() {
+    }
 
     public boolean isCompleated() {
         return compleated;
@@ -26,13 +28,6 @@ public class Task {
         this.id = id;
     }
 
-    public long getUser() {
-        return user;
-    }
-
-    public void setUser(long user) {
-        this.user = user;
-    }
 
     public String getValue() {
         return value;
