@@ -22,7 +22,7 @@
         android:onClick="onClick"
         android:id="@+id/button"
         android:layout_gravity="bottom"
-        android:text="add"
+        android:text="PUT"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
