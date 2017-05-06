@@ -8,24 +8,32 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import com.sdaacademy.kasperek.andrzej.apitasks.MainActivity;
 import com.sdaacademy.kasperek.andrzej.apitasks.R;
 import com.sdaacademy.kasperek.andrzej.apitasks.dto.TaskDTO;
+import com.sdaacademy.kasperek.andrzej.apitasks.dto.mapper.Mapper;
 import com.sdaacademy.kasperek.andrzej.apitasks.model.Task;
+import com.sdaacademy.kasperek.andrzej.apitasks.service.TaskService;
 
 import java.util.List;
 
-import static com.sdaacademy.kasperek.andrzej.apitasks.R.styleable.View;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by RENT on 2017-04-29.
  */
 
 public class Adapter extends ArrayAdapter<Task> {
-    public Adapter(Context context, int resource, List<Task> objects) {
+
+    private TaskService taskService;
+
+    public Adapter(Context context, int resource, List<Task> objects, TaskService taskService) {
         super(context, 0, objects);
+        this.taskService = taskService;
     }
 
     @NonNull
@@ -37,18 +45,31 @@ public class Adapter extends ArrayAdapter<Task> {
 
             CheckBox complete = (CheckBox) convertView.findViewById(R.id.checkBoxCompleted);
             complete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                private final Task task1 = task;
+
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (buttonView.isChecked()) {
-                        task1.setCompleated(true);
+                        task.setCompleted(true);
                     } else {
-                        task1.setCompleated(false);
+                        task.setCompleted(false);
                     }
-                    task1.setValue(task.getValue());
-                    task1.setId(task.getId());
 
+                    TaskDTO taskDTO = Mapper.taskToTaskDTOMapper(task);
+                    Call<TaskDTO> call = taskService.putTask(taskDTO);
+                    call.enqueue(new Callback<TaskDTO>() {
+
+                        @Override
+                        public void onResponse(Call<TaskDTO> call, Response<TaskDTO> response) {
+                            task.setCompleted(response.body().isCompleted());
+                            notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onFailure(Call<TaskDTO> call, Throwable t) {
+                        }
+                    });
                 }
+
 
             });
         }
@@ -57,7 +78,7 @@ public class Adapter extends ArrayAdapter<Task> {
         CheckBox complete = (CheckBox) convertView.findViewById(R.id.checkBoxCompleted);
         number.setText(String.valueOf(position + 1));
         value.setText(task.getValue());
-        complete.setChecked(task.isCompleated());
+        complete.setChecked(task.isCompleted());
         return convertView;
     }
 }

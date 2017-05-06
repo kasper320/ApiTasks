@@ -9,7 +9,7 @@
     <ListView
         android:id="@+id/show"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:background="@android:color/white">
     </ListView>
 
@@ -26,5 +26,12 @@
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
-
+    <Button
+        android:onClick="onClick"
+        android:id="@+id/updateButton"
+        android:layout_gravity="bottom"
+        android:text="UPDATE TASK"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 </LinearLayout>

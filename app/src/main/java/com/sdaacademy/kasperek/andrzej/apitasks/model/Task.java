@@ -5,19 +5,19 @@ package com.sdaacademy.kasperek.andrzej.apitasks.model;
  */
 
 public class Task {
-    private boolean compleated;
+    private boolean completed;
     private long id;
     private String value;
 
     public Task() {
     }
 
-    public boolean isCompleated() {
-        return compleated;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setCompleated(boolean compleated) {
-        this.compleated = compleated;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public long getId() {
