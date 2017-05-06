@@ -5,7 +5,7 @@ package com.sdaacademy.kasperek.andrzej.apitasks.dto;
  */
 
 public class TaskDTO {
-    private boolean compleated;
+    private boolean completed;
     private long id;
     private long user;
     private String value;
@@ -37,12 +37,12 @@ public class TaskDTO {
         this.id = id;
     }
 
-    public boolean isCompleated() {
-        return compleated;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setCompleated(boolean compleated) {
-        this.compleated = compleated;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
 
